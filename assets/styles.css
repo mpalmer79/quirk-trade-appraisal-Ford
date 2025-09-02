@@ -35,6 +35,10 @@ h1, h2 {
 }
 
 p.lead { text-align:center; margin:4px 0 14px; }
+/* Ford welcome message */
+.welcome-text {
+  font-weight: 700;  /* bold */
+}
 
 label {
   display:block;
