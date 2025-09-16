@@ -85,7 +85,10 @@ export async function handler(event) {
  * @returns {{subject: string, htmlBody: string, textBody: string}}
  */
 function createEmailContent(data) {
-  const included = new Set(["form-name", "company", "bot-field", "honeypot"]);
+  // Treat sales consultant as a special field appended at the bottom
+  const consultantValue = data.salesConsultant ?? data.SalesConsultant ?? "";
+  const included = new Set(["form-name", "company", "bot-field", "honeypot", "salesConsultant", "SalesConsultant"]);
+
   const rows = [];
   const hasVal = (v) => v !== undefined && v !== null && String(v).trim() !== "";
 
@@ -98,7 +101,13 @@ function createEmailContent(data) {
     }
   });
 
-  const htmlEscape = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  // Append Sales Consultant LAST if present
+  if (hasVal(consultantValue)) {
+    rows.push(["Sales Consultant", String(consultantValue)]);
+  }
+
+  const htmlEscape = (s) =>
+    String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
   const htmlBody = `
     <h2 style="margin:0 0 12px 0;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;">New Trade-In Lead</h2>
@@ -154,9 +163,6 @@ async function processAttachments(files) {
       totalSize += size;
 
       return {
-        // *** THIS IS THE FIX ***
-        // The original code had `Buffer.from(buffer)`, which is incorrect.
-        // `buffer` is already a Buffer, so we just need to Base64-encode it.
         content: buffer.toString("base64"),
         filename: file.filename,
         type: file.type || "application/octet-stream",
