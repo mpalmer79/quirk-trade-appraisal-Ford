@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://vpic.nhtsa.dot.gov"/>
   <link rel="stylesheet" href="assets/styles.css?v=2"/>
 
-  <!-- Watermark background (uses assets/quirk-lot2.png) -->
+  <!-- Watermark background (now uses assets/quirk-lot3.webp) -->
   <style>
-    :root { --wm-opacity: 0.30; } /* tweak this to lighten/darken the watermark */
+    :root { --wm-opacity: 0.35; } /* tweak this to lighten/darken the watermark */
 
     /* Put a soft, fixed watermark behind the whole page */
     body.has-watermark { position: relative; }
@@ -18,7 +18,7 @@
       content: "";
       position: fixed;
       inset: 0;
-      background: url("assets/quirk-lot2.png") center / cover no-repeat;
+      background: url("assets/quirk-lot3.webp") center / cover no-repeat;
       opacity: var(--wm-opacity);
       pointer-events: none;
       z-index: 0; /* sits behind the content below */
