@@ -8,8 +8,25 @@
   <link rel="preconnect" href="https://vpic.nhtsa.dot.gov"/>
   <link rel="stylesheet" href="assets/styles.css?v=2"/>
 
-  <!-- MOBILE-ONLY: stack QUIRK logo above the H1 and center both -->
+  <!-- Watermark background (uses assets/quirk-lot2.png) -->
   <style>
+    :root { --wm-opacity: 0.16; } /* tweak this to lighten/darken the watermark */
+
+    /* Put a soft, fixed watermark behind the whole page */
+    body.has-watermark { position: relative; }
+    body.has-watermark::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("assets/quirk-lot2.png") center / cover no-repeat;
+      opacity: var(--wm-opacity);
+      pointer-events: none;
+      z-index: 0; /* sits behind the content below */
+    }
+    /* Ensure the main form/content renders above the watermark */
+    #tradeForm, .toast { position: relative; z-index: 1; }
+
+    /* MOBILE-ONLY: stack QUIRK logo above the H1 and center both */
     @media (max-width: 640px) {
       .header-title{
         display:flex;
@@ -38,7 +55,7 @@
     }
   </style>
 </head>
-<body>
+<body class="has-watermark">
   <!-- 
       Final Version:
       1. The 'netlify' attribute tells Netlify to process the form.
@@ -82,7 +99,7 @@
     <div class="utilitybar">
       <div class="left-actions">
         <button type="button" id="decodeVinBtn" class="ghost-btn" aria-live="polite" data-i18n="decodeVinBtn">
-          Decode VIN & Prefill
+          Decode VIN &amp; Prefill
         </button>
         <button type="button" id="clearBtn" class="ghost-btn" data-i18n="clearBtn">Clear Form</button>
       </div>
