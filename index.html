@@ -7,6 +7,36 @@
   <meta name="robots" content="noindex"/>
   <link rel="preconnect" href="https://vpic.nhtsa.dot.gov"/>
   <link rel="stylesheet" href="assets/styles.css?v=2"/>
+
+  <!-- MOBILE-ONLY: stack QUIRK logo above the H1 and center both -->
+  <style>
+    @media (max-width: 640px) {
+      .header-title{
+        display:flex;
+        flex-direction:column;   /* logo on top, title below */
+        align-items:center;      /* center the stack */
+        text-align:center;
+        gap:10px;
+      }
+      .header-title .branding{
+        order:0 !important;      /* ensure logo is first on phones */
+        width:100%;
+        display:flex;
+        justify-content:center;
+        margin:0;
+      }
+      #quirkBrand{
+        max-width:220px;         /* keep logo reasonable on small screens */
+        margin:0 auto;
+      }
+      .header-title h1{
+        order:1 !important;      /* title under logo */
+        margin:0;
+        line-height:1.2;
+        text-align:center;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- 
