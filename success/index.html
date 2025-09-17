@@ -5,29 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="successTitle">Thanks! - Quirk Ford</title>
   <link rel="stylesheet" href="/assets/styles.css" />
+
+  <style>
+    /* Desktop/tablet: center the card both vertically and horizontally */
+    body.success {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;          /* vertical centering */
+      justify-content: center;      /* horizontal centering */
+      padding: 40px 16px;           /* breathing room */
+      background:
+        /* overlay over the watermark background image */
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
+        url('/assets/quirk-lot.png') center / cover no-repeat fixed;
+    }
+
+    /* The white “library card” */
+    main.success-card {
+      max-width: 720px;
+      width: 100%;
+      background: rgba(255,255,255,0.50);   /* requested 0.50 opacity */
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    h1 { color:#004a2f; margin:0 0 10px; }
+    p  { margin:0; }
+    
+    /* Mobile-only: move card near the top with a tiny gap */
+    @media (max-width: 640px) {
+      body.success {
+        align-items: flex-start;   /* push card toward the top */
+        padding-top: 12px;         /* small “breathing room” at the top */
+      }
+      /* Keep the same 0.50 opacity on mobile, too */
+      main.success-card {
+        background: rgba(255,255,255,0.50);
+      }
+    }
+  </style>
 </head>
-<body
-  style="
-    min-height:100vh;
-    /* Softer dark overlay for watermark background */
-    background:
-      linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
-      url('/assets/quirk-lot.png') center / cover no-repeat fixed;
-  "
->
-  <main style="max-width:720px;margin:40px auto;
-               background:rgba(255,255,255,0.95); /* nearly solid white for readability */
-               padding:24px;
-               border-radius:12px;
-               box-shadow:0 4px 10px rgba(0,0,0,0.15)">
-    <h1 style="text-align:center;margin:0 0 10px;color:#004a2f" data-i18n="successHeading">
-      Thank you!
-    </h1>
-    <p style="text-align:center;font-size:16px" data-i18n="successMessage">
+
+<body class="success">
+  <main class="success-card">
+    <h1 style="text-align:center" data-i18n="successHeading">Thank you!</h1>
+    <p style="text-align:center; font-size:16px" data-i18n="successMessage">
       We received your trade-in details. A Quirk Ford specialist will contact you shortly.
     </p>
 
-    <div style="display:flex;gap:10px;justify-content:center;margin-top:18px">
+    <div style="display:flex; gap:10px; justify-content:center; margin-top:18px">
       <a class="spanish-btn" href="/" style="text-decoration:none" data-i18n="submitAnother">
         Submit another vehicle
       </a>
